@@ -20,7 +20,7 @@ public class PersonControllerAPI {
     @GetMapping
     public ResponseEntity<List<Person>> getAll(){return ResponseEntity.ok(personRepo.list());}
     @GetMapping
-    public ResponseEntity<?> savaPerson(@RequestBody Person person){
+    public ResponseEntity<?> savePerson(@RequestBody Person person){
         personRepo.savePerson(person);
         return ResponseEntity.ok(person);
     }

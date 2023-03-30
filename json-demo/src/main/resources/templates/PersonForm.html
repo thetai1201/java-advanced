@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="index::header(form)">
+</head>
+<body>
+<div class="container">
+  <h1 class="text-center">Person Information Form</h1>
+  <form th:action="@{/post}" method="POST" th:object="${person}">
+    <input type="hidden" placeholder="id" th:field="*{id}"/><br><br>
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" class="form-control" id="name" th:field="*{name}">
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" th:field="*{email}">
+    </div>
+    <div class="mb-3">
+      <label for="job" class="form-label">Year</label>
+      <input type="text" class="form-control" id="job" th:field="*{job}">
+    </div>
+    <div>
+      <label for="gerder" class="form-label">Gerder</label>
+      <input type="text" class="form-control" id="gerder" th:field="*{gerder}">
+    </div>
+    <div>
+      <label for="city" class="form-label">City</label>
+      <input type="text" class="form-control" id="city" th:field="*{city}">
+    </div>
+    <div>
+      <label for="salary" class="form-label">Salary</label>
+      <input type="number" class="form-control" id="salary" th:field="*{salary}">
+    </div>
+    <div>
+      <label for="birthday" class="form-label">Birthday</label>
+      <input type="text" class="form-control" id="birthday" th:field="*{birthdate}">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+</body>
+</html>

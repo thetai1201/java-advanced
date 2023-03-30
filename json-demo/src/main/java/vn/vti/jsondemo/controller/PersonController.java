@@ -3,13 +3,12 @@ package vn.vti.jsondemo.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import vn.vti.jsondemo.model.Person;
 import vn.vti.jsondemo.repositories.PersonRespository;
 
+import javax.naming.Binding;
 import java.util.List;
 
 @Controller
@@ -24,7 +23,7 @@ public class PersonController {
     @GetMapping
     public String home(){return "index";}
     @GetMapping("listAll")
-    public String getALl(Model model, @RequestParam(value ="direction",required = false) String direction){
+    public String getAll(Model model, @RequestParam(value ="direction",required = false) String direction){
         if(direction==null){
             model.addAttribute("persons",repo.list());
         }else{
@@ -49,7 +48,19 @@ public class PersonController {
         model.addAttribute("person" , new Person());
         return "PersonForm";
     }
-
+    @PostMapping("/post")
+    public String postInfo( @ModelAttribute("person") Person person, BindingResult result, Model model){
+        if (!result.hasErrors()) {
+            if(person.getId()!=null){
+                repo.updatePerson(person.getId(), person);
+            }else{
+                repo.savePerson(person);
+            }
+            model.addAttribute("Persons", repo.list());
+            return "redirect:/listAll";
+        }
+        return "PersonForm";
+    }
     @GetMapping("/edit/{id}")
     public String editPerson(@PathVariable("id") Integer id , Model model){
         Person person = repo.findById(id);

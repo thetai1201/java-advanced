@@ -9,33 +9,43 @@
     <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Model</th>
-      <th scope="col">Maker</th>
-      <th scope="col">Year</th>
-      <th scope="col">Img</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Job</th>
+      <th scope="col">Gender</th>
+      <th scope="col">City</th>
+      <th scope="col">Salary</th>
+      <th scope="col">Birthday</th>
+      <th scope="col">Image</th>
       <th scope="col">Action</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="car,iCount:${cars}">
+    <tr th:each="person,iCount:${persons}">
       <th scope="row" th:text="${iCount.index+1}"></th>
       <td>
         <button data-bs-toggle="modal" type="button" class="btn btn-link "
-                data-bs-target="#exampleModal" + ${car.id} th:text="${car.model}">
+                data-bs-target="#exampleModal" + ${person.id} th:text="${person.name}">
         </button>
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title text-primary " id="'exampleModalLabel' +${car.id}" th:text="|Information of ${car.model}|"></h5>
+                <h5 class="modal-title text-primary " id="'exampleModalLabel' +${person.id}" th:text="|Information of ${person.name}|"></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
                 <div class="card" style="width: 18rem;">
                   <div class="card-body">
-                    <h5 class="card-title" th:text="|Model: ${car.model}|"></h5>
-                    <p class="card-text" th:text="|Maker: ${car.maker}|">
-                    <p class="card-text" th:text="|Year: ${car.year}|">
+                    <h5 class="card-title" th:text="|Name: ${person.name}|"></h5>
+                    <p class="card-text" th:text="|Email: ${person.email}|">
+                    <p class="card-text" th:text="|Job: ${person.job}|">
+                    <p class="card-text" th:text="|Gender: ${person.gerder}|">
+                    <p class="card-text" th:text="|City: ${person.city}|">
+                    <p class="card-text" th:text="|Salary: ${person.salary}|">
+                    <div>
+                      <img class="img-fluid" th:src="@{/photo/{name}(name=${person.photo})}" alt="No image">
+                  </div>
                   </div>
                 </div>
               </div>
@@ -46,14 +56,14 @@
           </div>
         </div>
       </td>
-      <td th:text="${car.maker}"></td>
-      <td th:text="${car.year}"></td>
+      <td th:text="${person.name}"></td>
+      <td th:text="${person.salary}"></td>
       <td>
-        <img th:src="@{/photo/{name}(name=${car.image})}" alt="No Img" style="width: 200px">
+        <img th:src="@{/photo/{name}(name=${person.photo})}" alt="No Img" style="width: 200px">
       </td>
       <td>
-        <a th:href="@{/edit/{id}(id=${car.id})}" class="text-infor mx-2">Edit</a>
-        <a th:href="@{/delete/{id}(id=${car.id})}" class="text-danger">Delete</a>
+        <a th:href="@{/edit/{id}(id=${person.id})}" class="text-infor mx-2">Edit</a>
+        <a th:href="@{/delete/{id}(id=${person.id})}" class="text-danger">Delete</a>
       </td>
     </tr>
     </tbody>
